@@ -37,7 +37,7 @@ def draw_bboxes(image_path, label_path):
         
         # Vẽ hình chữ nhật
         cv2.rectangle(image, (x1, y1), (x2, y2), (255, 0, 0), 2)
-        cv2.putText(image, str(class_id), (x1, y1 - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
+        cv2.putText(image, "mac", (x1, y1 - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
     
     # Hiển thị ảnh
     plt.imshow(image)
@@ -53,3 +53,4 @@ for filename in os.listdir(image_dir):
         
         print(f"Kiểm tra ảnh: {image_path}")
         draw_bboxes(image_path, label_path)
+
