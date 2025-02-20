@@ -5,9 +5,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Tạo thư mục lưu ảnh tăng cường nếu chưa có
-os.makedirs("mac_nuts_aug", exist_ok=True)
-os.makedirs("mac_nuts_aug/aug_images", exist_ok=True)
-os.makedirs("mac_nuts_aug/aug_labels", exist_ok=True)
+os.makedirs("multinuts_aug", exist_ok=True)
+os.makedirs("multinuts_aug/aug_images", exist_ok=True)
+os.makedirs("multinuts_aug/aug_labels", exist_ok=True)
 
 # Augmentation với cập nhật bounding box
 transform = A.Compose([
@@ -17,10 +17,10 @@ transform = A.Compose([
     A.GaussNoise(p=0.2),
 ], bbox_params=A.BboxParams(format="yolo", label_fields=["category_ids"], min_visibility=0.3))  # Giữ bounding box hợp lệ
 
-image_dir = "mac_nuts/images"
-label_dir = "mac_nuts/labels"
-aug_image_dir = "mac_nuts_aug/aug_images"
-aug_label_dir = "mac_nuts_aug/aug_labels"
+image_dir = "multinuts/images"
+label_dir = "multinuts/labels"
+aug_image_dir = "multinuts_aug/aug_images"
+aug_label_dir = "multinuts_aug/aug_labels"
 
 # Xử lý từng ảnh
 for filename in os.listdir(image_dir):
@@ -131,12 +131,12 @@ def merge_folders(src_folder1, src_folder2, dest_folder):
                     print(f"Skipped (duplicate): {file}")
 
 # Định nghĩa đường dẫn
-image_folder1 = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/mac_nuts/images"
-image_folder2 = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/mac_nuts_aug/aug_images"
+image_folder1 = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/multinuts/images"
+image_folder2 = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/multinuts_aug/aug_images"
 image_dest = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/data_train/images"
 
-label_folder1 = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/mac_nuts/labels"
-label_folder2 = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/mac_nuts_aug/aug_labels"
+label_folder1 = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/multinuts/labels"
+label_folder2 = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/multinuts_aug/aug_labels"
 label_dest = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/data_train/labels"
 
 # Gộp ảnh
