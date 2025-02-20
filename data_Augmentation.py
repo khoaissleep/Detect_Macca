@@ -5,8 +5,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Tạo thư mục lưu ảnh tăng cường nếu chưa có
-os.makedirs("mac_nuts/aug_images", exist_ok=True)
-os.makedirs("mac_nuts/aug_labels", exist_ok=True)
+os.makedirs("mac_nuts_aug", exist_ok=True)
+os.makedirs("mac_nuts_aug/aug_images", exist_ok=True)
+os.makedirs("mac_nuts_aug/aug_labels", exist_ok=True)
 
 # Augmentation với cập nhật bounding box
 transform = A.Compose([
@@ -19,8 +20,8 @@ transform = A.Compose([
 
 image_dir = "mac_nuts/images"
 label_dir = "mac_nuts/labels"
-aug_image_dir = "mac_nuts/aug_images"
-aug_label_dir = "mac_nuts/aug_labels"
+aug_image_dir = "mac_nuts_aug/aug_images"
+aug_label_dir = "mac_nuts_aug/aug_labels"
 
 # Xử lý từng ảnh
 for filename in os.listdir(image_dir):
@@ -88,3 +89,58 @@ else:
     plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
     plt.axis("off")
     plt.show()
+
+# kết hợp data aug với data gốc
+import os
+import shutil
+import hashlib
+
+def get_file_hash(file_path):
+    """Tạo hash MD5 của file để kiểm tra trùng lặp nội dung."""
+    hasher = hashlib.md5()
+    with open(file_path, 'rb') as f:
+        buf = f.read()
+        hasher.update(buf)
+    return hasher.hexdigest()
+
+def merge_folders(src_folder1, src_folder2, dest_folder):
+    """Hợp nhất hai thư mục mà không bị trùng file."""
+    if not os.path.exists(dest_folder):
+        os.makedirs(dest_folder)
+
+    existing_files = {}  # Lưu hash của file đã tồn tại
+    for file in os.listdir(dest_folder):
+        file_path = os.path.join(dest_folder, file)
+        if os.path.isfile(file_path):
+            existing_files[get_file_hash(file_path)] = file
+
+    for src_folder in [src_folder1, src_folder2]:
+        for file in os.listdir(src_folder):
+            src_path = os.path.join(src_folder, file)
+            if os.path.isfile(src_path):
+                file_hash = get_file_hash(src_path)
+                if file_hash not in existing_files:  # Nếu chưa tồn tại thì copy
+                    shutil.copy2(src_path, dest_folder)
+                    existing_files[file_hash] = file
+                    print(f"Copied: {file}")
+                else:
+                    print(f"Skipped (duplicate): {file}")
+
+# Định nghĩa đường dẫn
+image_folder1 = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/mac_nuts/images"
+image_folder2 = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/mac_nuts_aug/aug_images"
+image_dest = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/data_train/images"
+
+label_folder1 = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/mac_nuts/labels"
+label_folder2 = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/mac_nuts_aug/aug_labels"
+label_dest = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/data_train/labels"
+
+# Gộp ảnh
+print("Merging images...")
+merge_folders(image_folder1, image_folder2, image_dest)
+
+# Gộp nhãn
+print("Merging labels...")
+merge_folders(label_folder1, label_folder2, label_dest)
+
+print("Merging completed!")
