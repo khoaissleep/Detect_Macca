@@ -3,7 +3,7 @@ import torch
 from torchvision.ops import box_iou
 
 # Load model
-model = YOLO("/home/khoa_is_sleep/DETECT_macadamia-nuts-1/best.pt")
+model = YOLO("/home/khoa_is_sleep/DETECT_macadamia-nuts-2/yolov8n.pt")
 
 # Đọc dữ liệu test
 import os

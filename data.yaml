@@ -1,5 +1,6 @@
-path: mac_nuts
-train: aug_images  # Thư mục ảnh đã tăng cường
-val: images        # Thư mục ảnh gốc để đánh giá
-nc: 1             # Số lượng lớp (1 nếu chỉ nhận diện "mac")
-names: ["mac"]
+path: /home/khoa_is_sleep/DETECT_macadamia-nuts-2
+train: data_train  # Thư mục ảnh huấn luyện
+val: data_val    # Thư mục ảnh để đánh giá
+nc: 1           # Số lượng lớp (1 nếu chỉ nhận diện "mac")
+names:
+  - mac
