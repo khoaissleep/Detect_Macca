@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import os
 
 # Đường dẫn đến thư mục ảnh và nhãn
-image_dir = "multinuts/images"
-label_dir = "multinuts/labels"
+image_dir = "multinuts_aug/aug_images"
+label_dir = "multinuts_aug/aug_labels"
 
 def draw_bboxes(image_path, label_path):
     # Đọc ảnh
