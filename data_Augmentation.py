@@ -12,11 +12,10 @@ os.makedirs("mac_nuts_aug/aug_labels", exist_ok=True)
 # Augmentation với cập nhật bounding box
 transform = A.Compose([
     A.HorizontalFlip(p=0.5),
-    A.Rotate(limit=10, p=0.5, border_mode=cv2.BORDER_CONSTANT),
+    A.Rotate(limit=10, p=0.5, border_mode=cv2.BORDER_REFLECT_101),  # Giữ vật thể trong ảnh
     A.RandomBrightnessContrast(p=0.2),
     A.GaussNoise(p=0.2),
-    A.RandomCrop(width=400, height=400, p=0.3),
-], bbox_params=A.BboxParams(format="yolo", label_fields=["category_ids"]))
+], bbox_params=A.BboxParams(format="yolo", label_fields=["category_ids"], min_visibility=0.3))  # Giữ bounding box hợp lệ
 
 image_dir = "mac_nuts/images"
 label_dir = "mac_nuts/labels"
@@ -61,6 +60,11 @@ for filename in os.listdir(image_dir):
             aug_image = augmented["image"]
             aug_bboxes = augmented["bboxes"]
 
+            # Kiểm tra nếu không còn bounding box hợp lệ
+            if len(aug_bboxes) == 0:
+                print(f"Bỏ ảnh {filename}_aug{i} vì không có bounding box hợp lệ.")
+                continue
+
             # Chuyển ảnh về BGR để lưu với OpenCV
             aug_image_bgr = cv2.cvtColor(aug_image, cv2.COLOR_RGB2BGR)
 
@@ -90,7 +94,7 @@ else:
     plt.axis("off")
     plt.show()
 
-# kết hợp data aug với data gốc
+# Kết hợp data aug với data gốc
 import os
 import shutil
 import hashlib
