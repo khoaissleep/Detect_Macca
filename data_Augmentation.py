@@ -131,13 +131,13 @@ def merge_folders(src_folder1, src_folder2, dest_folder):
                     print(f"Skipped (duplicate): {file}")
 
 # Định nghĩa đường dẫn
-image_folder1 = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/multinuts/images"
-image_folder2 = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/multinuts_aug/aug_images"
-image_dest = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/data_train/images"
+image_folder1 = 'multinuts/images'
+image_folder2 = 'multinuts_aug/aug_images'
+image_dest = 'data_train/images'
 
-label_folder1 = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/multinuts/labels"
-label_folder2 = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/multinuts_aug/aug_labels"
-label_dest = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/data_train/labels"
+label_folder1 = 'multinuts/labels'
+label_folder2 = 'multinuts_aug/aug_labels'
+label_dest = 'data_train/labels'
 
 # Gộp ảnh
 print("Merging images...")

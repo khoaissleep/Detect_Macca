@@ -10,12 +10,12 @@ device = "cpu"
 print(f"Using device: {device}")
 
 # Load mô hình YOLO đã huấn luyện
-model_path = "/home/khoa_is_sleep/Detect_Multinuts/runs/detect/train5/weights/last.pt"
+model_path = 'runs/detect/train5/weights/last.pt'
 model = YOLO(model_path).to(device)
 
 # Thư mục ảnh validation
-val_images_dir = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/data_val/images"
-labels_dir = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/data_val/labels"  # Nơi chứa file label
+val_images_dir = 'data_val/images'
+labels_dir = 'data_val/labels'  # Nơi chứa file label
 
 # Kiểm tra thư mục ảnh
 if not os.path.exists(val_images_dir):
@@ -24,7 +24,7 @@ if not os.path.exists(val_images_dir):
 
 # Chạy đánh giá trên tập validation
 metrics = model.val(
-    data="/home/khoa_is_sleep/DETECT_macadamia-nuts-2/data.yaml",
+    data='data.yaml',
     batch=2,        
     imgsz=640,
     device=device,
