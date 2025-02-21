@@ -10,7 +10,7 @@ device = "cpu"
 print(f"Using device: {device}")
 
 # Load mô hình YOLO đã huấn luyện
-model_path = "/home/khoa_is_sleep/DETECT_macadamia-nuts-2/runs/detect/train3/weights/best.pt"
+model_path = "/home/khoa_is_sleep/Detect_Multinuts/runs/detect/train5/weights/last.pt"
 model = YOLO(model_path).to(device)
 
 # Thư mục ảnh validation
