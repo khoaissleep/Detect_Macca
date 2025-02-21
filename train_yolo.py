@@ -14,7 +14,7 @@ model = YOLO("yolov8n.pt")
 # Huấn luyện mô hình
 model.train(
     data=data_yaml,       # File cấu hình dataset
-    epochs=10,           # Tăng số epoch để mô hình học tốt hơn
+    epochs=6,           # Tăng số epoch để mô hình học tốt hơn
     batch=2,              # Batch nhỏ vì train trên CPU
     imgsz=640,            # Kích thước ảnh
     device=device,        # Train trên CPU
