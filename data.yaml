@@ -1,4 +1,4 @@
-path: /home/khoa_is_sleep/DETECT_macadamia-nuts-2
+path: "/home/khoa_is_sleep/Detect_Multinuts/DATA"
 train: data_train  # Thư mục ảnh huấn luyện
 val: data_val    # Thư mục ảnh để đánh giá
 nc: 1           # Số lượng lớp (1 nếu chỉ nhận diện "mac")

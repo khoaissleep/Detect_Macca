@@ -10,11 +10,11 @@ device = "cpu"
 print(f"Using device: {device}")
 
 # Load mô hình YOLO đã huấn luyện
-model_path = 'runs/detect/train5/weights/last.pt'
+model_path = '/home/khoa_is_sleep/Detect_Multinuts/runs/detect/train8/weights/last.pt'
 model = YOLO(model_path).to(device)
 
 # Thư mục ảnh validation
-val_images_dir = 'data_val/images'
+val_images_dir = '/home/khoa_is_sleep/Detect_Multinuts/DATA/data_val/images'
 labels_dir = 'data_val/labels'  # Nơi chứa file label
 
 # Kiểm tra thư mục ảnh

@@ -4,8 +4,8 @@ import random
 from pathlib import Path
 
 # Định nghĩa đường dẫn thư mục
-data_train = Path("data_train")  # Thư mục chứa ảnh & nhãn gốc
-data_val = Path("data_val")  # Thư mục chứa dữ liệu validation
+data_train = Path("/home/khoa_is_sleep/Detect_Multinuts/DATA/data_train")  # Thư mục chứa ảnh & nhãn gốc
+data_val = Path("/home/khoa_is_sleep/Detect_Multinuts/DATA/data_val")  # Thư mục chứa dữ liệu validation
 
 # Tạo thư mục validation nếu chưa có
 (data_val / "images").mkdir(parents=True, exist_ok=True)
